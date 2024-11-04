@@ -1,0 +1,47 @@
+server:
+   port: 2972
+   tomcat:
+     min-spare: 25
+     max-threads: 750
+spring:
+  application:
+     name: generator-bri-v2
+
+logging:
+  level:
+    root: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,refresh,health,bus-refresh,busrefresh
+
+  endpoint:
+    refresh:
+      enabled: true
+config:
+  voltage:
+    PolicyUrl: https://voltage-pp-0000.voltage.multisoft.co.id/policy/clientPolicy.xml
+    TrustStorePath: /opt/voltage/simpleapi/trustStore
+    CachePath: /opt/voltage/simpleapi/cache
+    Identity: admin@voltage.co.id
+    SharedSecret: qwerty123
+    AlphanumericFormat: alphanumeric
+  datasource:
+    KeyDatasource:
+      Enabled: true
+      IdleTimeout: 900000
+      JdbcUrl: jdbc:mysql://20.167.40.12:3306/voltdb?allowPublicKeyRetrieval=true #172.18.245.83
+      Username: voltage
+      MaxLifetime: 1800000
+      TestQuery: SELECT 1
+      Password: Voltage123!
+      MinimumIdle: 1
+      DriverClass: com.mysql.cj.jdbc.Driver
+      PoolName: KeyDatasource
+      MaximumPoolSize: 1000
+      AutoCommit: true
+      ConnectionTimeout: 500
+      #java -jar generator-bri-v2-1.0-SNAPSHOT.jar --spring.profiles.active=server
+      #its mean it will run a application-server.yml as a configuration
